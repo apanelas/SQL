@@ -1,0 +1,20 @@
+INSERT into furniture_store VALUES
+(1, "Bed", 5000, "mattress and baza", 57), 
+(2, "Couch", 1000, "pull-out couch", 77), 
+(3, "Kitchen island", 1000, "from ikea", 105), 
+(4, "Dresser", 1500, "from ikea", 150), 
+(5, "Side table", 400, "bedside table", 40), 
+(6, "air conditioner", 100, "cheap but works", 56), 
+(7, "fan", 1000, "top button doesn't work", 158), 
+(8, "table and chairs", 3000, "sold together", 160), 
+(9, "coffee table", 400, "cheap", 30), 
+(10, "bookcase", 750, "ikea", 200), 
+(11, "purple chair", 750, "ikea", 170), 
+(12, "multi-colored chair", 300, "from jake", 90), 
+(13, "stand light", 400, "ikea", 220), 
+(14, "rug", 250, "koctas", 250), 
+(15, "printer", 300, "got it for free", 20);
+
+SELECT * FROM furniture_store ORDER BY price; 
+
+SELECT MAX(height) FROM furniture_store
