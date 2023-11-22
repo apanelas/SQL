@@ -1,9 +1,20 @@
 SELECT DISTINCT country FROM chinook.customers;
 
 SELECT * FROM chinook.customers
-WHERE country = "India"
+WHERE country = "India";
 
 SELECT Country, COUNT(CustomerId) AS Customers
 FROM (SELECT DISTINCT Country, CustomerId
 FROM chinook.customers ) AS DistinctCountries
+GROUP BY Country;
+
+WITH customerstotal AS (
+SELECT invoices.CustomerId, SUM(invoices.Total) AS customertotal, customers.Country
+FROM invoices
+JOIN customers
+ON invoices.CustomerId = customers.CustomerId
+GROUP BY customers.CustomerId)
+
+SELECT DISTINCT Country, SUM(customertotal)
+FROM customerstotal
 GROUP BY Country;
