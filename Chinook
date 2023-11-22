@@ -9,12 +9,16 @@ FROM chinook.customers ) AS DistinctCountries
 GROUP BY Country;
 
 WITH customerstotal AS (
-SELECT invoices.CustomerId, SUM(invoices.Total) AS customertotal, customers.Country
+SELECT invoices.CustomerId, ROUND(SUM(invoices.Total), 2) AS customertotal, customers.Country
 FROM invoices
 JOIN customers
 ON invoices.CustomerId = customers.CustomerId
 GROUP BY customers.CustomerId)
 
-SELECT DISTINCT Country, SUM(customertotal)
+SELECT Country, ROUND(SUM(customertotal), 2) AS totalsales
 FROM customerstotal
 GROUP BY Country;
+
+SELECT ROUND(SUM(Total), 2)
+FROM invoices
+WHERE InvoiceDate LIKE '2009%';
