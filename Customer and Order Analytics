@@ -1,3 +1,4 @@
+
 SELECT DISTINCT country FROM chinook.customers;
 
 SELECT * FROM chinook.customers
