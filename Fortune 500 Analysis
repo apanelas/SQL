@@ -58,7 +58,9 @@ VALUES
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
+#Analysis:
 
+#Question
 SELECT company_name, industry, maternity_leave_weeks, 
 CASE WHEN maternity_leave_weeks = 6 THEN "minimum"
 WHEN maternity_leave_weeks >12 THEN "generous"
@@ -66,5 +68,22 @@ ELSE "extra"
 END AS maternity_leave
 FROM fortune_companies;
 
+#Question
 SELECT industry, AVG(maternity_leave_weeks) AS average_maternity_leave FROM fortune_companies
 GROUP BY industry;
+
+#Question
+SELECT industry, AVG(maternity_leave_weeks) AS average_maternity_leave, avg_employee_tenure
+FROM fortune_companies
+GROUP BY industry
+HAVING average_maternity_leave > 10;
+
+#Question
+SELECT company_name, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure FROM fortune_companies
+ORDER BY avg_employee_tenure DESC;
+
+#Question
+SELECT company_name, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure FROM fortune_companies
+WHERE paid_time_off_days >20
+AND maternity_leave_weeks >12
+AND avg_employee_tenure >6;
