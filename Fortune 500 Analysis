@@ -1,3 +1,5 @@
+#In this project I take theoretical Fortune 500 data and quantify employee data such as maternity leave and average tenure both by company and by industry identifying companies and industries with most generous leave policies and longest employee tenure.
+
 #This analysis utilized the following Fortune 500 dataset:
 
 CREATE TABLE fortune_companies (
@@ -60,7 +62,7 @@ VALUES
 
 #Analysis:
 
-#Question
+#What companies give the minimum amount of maternity leave, a little extra, and which companies are more generous with their maternity leave?
 SELECT company_name, industry, maternity_leave_weeks, 
 CASE WHEN maternity_leave_weeks = 6 THEN "minimum"
 WHEN maternity_leave_weeks >12 THEN "generous"
@@ -68,22 +70,22 @@ ELSE "extra"
 END AS maternity_leave
 FROM fortune_companies;
 
-#Question
+#What are the average lengths of maternity leave offered per industry?
 SELECT industry, AVG(maternity_leave_weeks) AS average_maternity_leave FROM fortune_companies
 GROUP BY industry;
 
-#Question
+#Which industries offer an average of more than 10 weeks of maternity leave and what is their average employee tenure?
 SELECT industry, AVG(maternity_leave_weeks) AS average_maternity_leave, avg_employee_tenure
 FROM fortune_companies
 GROUP BY industry
 HAVING average_maternity_leave > 10;
 
-#Question
+#Rank companies by average employee tenure.
 SELECT company_name, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure FROM fortune_companies
 ORDER BY avg_employee_tenure DESC;
 
-#Question
+#Which companies offer at least 20 paid days off, at least 12 weeks of maternity leave and average employee tenure is at least 6 years?
 SELECT company_name, paid_time_off_days, maternity_leave_weeks, avg_employee_tenure FROM fortune_companies
-WHERE paid_time_off_days >20
-AND maternity_leave_weeks >12
-AND avg_employee_tenure >6;
+WHERE paid_time_off_days >=20
+AND maternity_leave_weeks >=12
+AND avg_employee_tenure >=6;
