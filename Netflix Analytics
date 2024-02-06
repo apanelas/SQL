@@ -1,3 +1,5 @@
+#Description
+
 #This project utilized data from the following Netflix dataset:
 
 CREATE TABLE netflix_titles_info
@@ -58,9 +60,7 @@ VALUES
     ('s20', NULL, 'Blanca SuÃ¡rez| IvÃ¡n Marcos| Ã“scar Casas| AdriÃ¡n Lastra| Francesc Garrido| Stefan Weinert| Julia MÃ¶ller| Alicia Chojnowski')
     ;
 
-SELECT * FROM "netflix_titles_info" LIMIT 5;
-
-SELECT * FROM "netflix_people" LIMIT 5;
+#Analysis:
 
 SELECT * FROM "netflix_titles_info"
 JOIN "netflix_people"
