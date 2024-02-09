@@ -1,6 +1,6 @@
-# For this project, I downloaded Spotify data from Kaggle.
-# Then I created a table to insert Spotify data into.
-# Finally, I performed analytics on the data using SQL. 
+#For this project, I downloaded Spotify data from Kaggle.
+#Then I created a table to insert Spotify data into.
+#Finally, I performed analytics on the data using SQL. 
 
 #Creating the table: 
 CREATE TABLE BIT_DB.Spotifydata (
@@ -27,22 +27,27 @@ time_signature integer NOT NULL )
 
 #Next, I explored the data using the following SQL.
 
+#What is the danceability of the ten most popular tracks?
 SELECT artist_name, track_name, popularity, danceability
 FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC
 LIMIT 10;
 
-SELECT AVG(tempo), AVG (duration_ms)/60000 AS duration_minutes FROM BIT_DB.Spotifydata;
+#What is the average tempo of the tracks and the average duration in minutes?
+SELECT ROUND(AVG(tempo), 2) AS average_tempo, ROUND(AVG (duration_ms)/60000, 2) AS average_duration_minutes FROM BIT_DB.Spotifydata;
 
+#What is the average danceability of songs with a popularity score of at least 92?
 SELECT AVG(danceability)
 FROM BIT_DB.Spotifydata
 WHERE popularity >= 92;
 
+#Identify the artists whose songs appear most frequently on the list and rank them in order of frequency
 SELECT distinct artist_name, COUNT(artist_name) AS frequency
 FROM BIT_DB.Spotifydata
 GROUP BY artist_name
 ORDER BY frequency DESC;
 
+#I used a CTE to denote which artists had an average popularity of 90 or more across all their tracks on the list and tagged them as "Top Star"s 
 WITH popularity_average_CTE AS (
 SELECT s.artist_name, AVG(s.popularity) AS average_popularity
 FROM Spotifydata s
@@ -50,4 +55,5 @@ GROUP BY s.artist_name)
 
 SELECT artist_name, average_popularity, 'Top Star' AS tag
 FROM popularity_average_CTE
-WHERE average_popularity>=90;
+WHERE average_popularity>=90
+ORDER BY average_popularity DESC;
