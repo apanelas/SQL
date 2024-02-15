@@ -215,33 +215,26 @@ INSERT INTO countries(name,population,percent_one_year_change,population_change,
 INSERT INTO countries(name,population,percent_one_year_change,population_change,density_per_sq_km,area_sq_km,net_migrants,fertility_rate,median_age,percent_of_world_pop) VALUES ('Antigua and Barbuda',97929,0.84,811,223,440,0,2.00,34.00,0);
 
 #What is the average fertility rate for countries in the table, what is the maximum and minimum fertility rates for countries in the table?
-
 SELECT AVG(fertility_rate) AS average_fertility_rate, MAX(fertility_rate) AS highest_fertility_rate, MIN(fertility_rate) AS lowest_fertility_rate FROM countries;
 
 #Which countries have low population density and no inward migration?
-
 SELECT name, density_per_sq_km, net_migrants FROM countries
 WHERE density_per_sq_km <80 AND net_migrants <0 ORDER BY density_per_sq_km;
 
 #How many countries have low population density and no inward migration?
-
 SELECT COUNT (*) FROM countries WHERE density_per_sq_km <80 AND net_migrants <0; 
 
 #Which countries have no inward migration and a fertility rate below poplulation replacement?
-
 SELECT name, net_migrants, fertility_rate FROM countries
 WHERE net_migrants <0 AND fertility_rate <2 ORDER BY net_migrants;
 
 #How many countries have no inward migration and a fertility rate below population replacement?
-
 SELECT COUNT (*) FROM countries WHERE net_migrants <0 AND fertility_rate <2; 
 
 #How many countries have lost population during the year looked at?
-
 SELECT COUNT (*) FROM countries WHERE percent_one_year_change <0;
 
 #Label countries based on whether or not their population has grown, remained stable, or declined during the year looked at.
-
 SELECT name, percent_one_year_change, 
 CASE
 WHEN percent_one_year_change > 2 THEN "population growth"
@@ -252,7 +245,6 @@ FROM countries
 GROUP by percent_one_year_change;
 
 #Quantify countries based on whether or not their population has grown, remained stable, or declined during the year looked at.
-
 SELECT COUNT (*),
 CASE
 WHEN percent_one_year_change > 2 THEN "population growth"
